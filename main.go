@@ -11,13 +11,16 @@ import (
 )
 
 func main() {
+	// flag for apply vs. destroy
 	var destroy bool
 	flag.BoolVar(&destroy, "destroy", false, "destroy")
 	flag.Parse()
 
+	// set up command meta used by all commands
 	var r strings.Reader
 	var w bytes.Buffer
 	var ew bytes.Buffer
+
 	ui := cli.BasicUi{
 		Reader:      &r,
 		Writer:      &w,
@@ -28,6 +31,7 @@ func main() {
 		Ui: &ui,
 	}
 
+	// init
 	init := command.InitCommand{
 		Meta: meta,
 	}
@@ -35,6 +39,7 @@ func main() {
 		log.Fatal("Could not initialize")
 	}
 
+	// apply/destroy
 	apply := command.ApplyCommand{
 		Meta:    meta,
 		Destroy: destroy,
@@ -43,6 +48,7 @@ func main() {
 		log.Fatal("Could not apply changes")
 	}
 
+	// finished
 	if destroy {
 		log.Println("Changes destroyed successfully")
 	} else {
