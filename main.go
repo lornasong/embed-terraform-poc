@@ -46,7 +46,8 @@ func initialize() error {
 	}
 
 	meta := command.Meta{
-		Ui: &ui,
+		Ui:                  &ui,
+		RunningInAutomation: true,
 	}
 
 	init := command.InitCommand{
@@ -76,7 +77,8 @@ func applyDestroy(destroy bool) error {
 	}
 
 	meta := command.Meta{
-		Ui: &ui,
+		Ui:                  &ui,
+		RunningInAutomation: true,
 	}
 
 	apply := command.ApplyCommand{
